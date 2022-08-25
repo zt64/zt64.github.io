@@ -18,7 +18,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.*
 
-
 @Serializable
 data class Presence(
     @SerialName("active_on_discord_desktop")
@@ -227,7 +226,7 @@ object LanyardApi {
                         }
                     }
                 }
-                else -> { }
+                else -> {}
             }
         }
     }
