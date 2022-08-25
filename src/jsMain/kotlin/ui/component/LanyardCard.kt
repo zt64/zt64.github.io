@@ -75,7 +75,7 @@ fun LanyardCard() {
 
 @Composable
 fun PresenceIcon(
-    applicationId: String,
+    applicationId: String?,
     largeImage: String,
     smallImage: String? = null,
 ) {
@@ -86,6 +86,12 @@ fun PresenceIcon(
             }
         }
     ) {
+        val src = if (largeImage.startsWith("spotify:")) {
+            "https://i.scdn.co/image/${largeImage.removePrefix("spotify:")}"
+        } else {
+            LanyardApi.getAssetImage(applicationId!!, largeImage)
+        }
+
         Img(
             attrs = {
                 style {
@@ -100,7 +106,7 @@ fun PresenceIcon(
                     }
                 }
             },
-            src = LanyardApi.getAssetImage(applicationId, largeImage)
+            src = src
         )
 
         if (smallImage != null) {
@@ -116,7 +122,7 @@ fun PresenceIcon(
                         right((-4).px)
                     }
                 },
-                src = LanyardApi.getAssetImage(applicationId, smallImage)
+                src = LanyardApi.getAssetImage(applicationId!!, smallImage)
             )
         }
     }

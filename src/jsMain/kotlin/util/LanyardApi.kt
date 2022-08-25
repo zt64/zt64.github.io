@@ -38,7 +38,7 @@ data class Presence(
     @Serializable
     data class Activity(
         @SerialName("application_id")
-        val applicationId: String,
+        val applicationId: String? = null,
         val assets: Assets,
         @SerialName("created_at")
         val createdAt: Long,
