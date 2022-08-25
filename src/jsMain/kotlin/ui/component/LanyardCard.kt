@@ -94,8 +94,10 @@ fun PresenceIcon(
                     height(7.cssRem)
                     borderRadius(1.2.cssRem)
 
-                    property("mask", "url(activity-mask.svg)")
-                    property("mask-size", "cover")
+                    if (smallImage != null) {
+                        property("mask", "url(activity-mask.svg)")
+                        property("mask-size", "cover")
+                    }
                 }
             },
             src = LanyardApi.getAssetImage(applicationId, largeImage)
