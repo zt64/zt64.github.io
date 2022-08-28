@@ -238,6 +238,6 @@ object LanyardApi {
     }
 
     fun getAssetImage(applicationId: String, assetId: String): String {
-        return "https://cdn.discordapp.com/app-assets/${applicationId}/${assetId}.png"
+        return "https://cdn.discordapp.com/app-assets/${applicationId}/${assetId}.webp?size=512"
     }
 }
