@@ -1,4 +1,7 @@
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposableInBody
@@ -7,9 +10,9 @@ import ui.theme.WebsiteStyleSheet
 import kotlin.random.Random
 
 fun main() {
-
     renderComposableInBody {
-	    var zoter by remember { mutableStateOf(false) }
+        var zoter by remember { mutableStateOf(false) }
+
         Style(WebsiteStyleSheet)
 
         Row(
@@ -49,20 +52,19 @@ fun main() {
                             style {
                                 fontWeight(700)
                             }
+
                             onClick {
                                 if (zoter) {
-                                    zoter = false;
+                                    zoter = false
+
                                     return@onClick
                                 }
+
                                 zoter = Random.nextInt(10) < 3
                             }
                         }
                     ) {
-                        if (zoter) {
-                            Text("zoter")
-                        } else {
-                            Text("zt")
-                        }
+                        Text(if (zoter) "zoter" else "zt")
                     }
                 }
 
@@ -89,12 +91,6 @@ fun main() {
                         icon = { Icon("icons/github.svg") },
                         label = { Text("Github") },
                         url = "https://github.com/zt64"
-                    )
-
-                    SocialChip(
-                        icon = { Icon("icons/discord.svg") },
-                        label = { Text("Discord") },
-                        url = ""
                     )
                 }
 
