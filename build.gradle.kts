@@ -27,7 +27,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
                 // Ktor
-                val ktorVersion = "2.1.0"
+                val ktorVersion = "2.1.1"
                 implementation("io.ktor:ktor-client-core-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-websockets-js:$ktorVersion")
