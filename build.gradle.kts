@@ -3,7 +3,7 @@ import org.jetbrains.compose.compose
 plugins {
     kotlin("multiplatform") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
-    id("org.jetbrains.compose") version "1.2.0-alpha01-dev774"
+    id("org.jetbrains.compose") version "1.2.0-beta01"
 }
 
 repositories {
