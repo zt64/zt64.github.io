@@ -1,5 +1,5 @@
 if (config.mode == "production") {
-    (config.experiments = config.experiments || {}).outputModule = true;
+    (config.experiments ??= {}).outputModule = true;
     config.output.library = {
         type: "module"
     };
