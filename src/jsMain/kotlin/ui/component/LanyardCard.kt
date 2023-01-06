@@ -42,11 +42,13 @@ fun LanyardCard() {
         Container(
             gap = 1.3.cssRem
         ) {
-            PresenceIcon(
-                applicationId = activity.applicationId,
-                largeImage = activity.assets.largeImage,
-                smallImage = activity.assets.smallImage
-            )
+            if (activity.assets?.largeImage != null) {
+                PresenceIcon(
+                    applicationId = activity.applicationId,
+                    largeImage = activity.assets.largeImage,
+                    smallImage = activity.assets.smallImage
+                )
+            }
 
             Column(
                 gap = 0.2.cssRem

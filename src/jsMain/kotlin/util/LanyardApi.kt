@@ -39,7 +39,7 @@ data class Presence(
     data class Activity(
         @SerialName("application_id")
         val applicationId: String? = null,
-        val assets: Assets,
+        val assets: Assets? = null,
         @SerialName("created_at")
         val createdAt: Long,
         val details: String? = null,
@@ -208,6 +208,7 @@ object LanyardApi {
 
                     json.decodeFromString<Message>(jsonStr)
                 }
+
                 else -> return@collect
             }
 
@@ -215,6 +216,7 @@ object LanyardApi {
                 is Message.Event -> {
                     activity = message.data.activities.firstOrNull()
                 }
+
                 is Message.Hello -> {
                     val initializeMessage = Message.Initialize(Message.Initialize.Data(USER_ID))
 
@@ -226,6 +228,7 @@ object LanyardApi {
                         }
                     }
                 }
+
                 else -> {}
             }
         }
