@@ -78,7 +78,7 @@ fun main() {
                 ) {
                     Text(
                         """
-                        I'm an 18yo student studying Applied Computer Science who likes making random things. 
+                        I'm a 19yo student studying Applied Computer Science who likes making random things. 
                         Currently I’m working on a YouTube client for Android called Hyperion.
                         """.trimIndent()
                     )
