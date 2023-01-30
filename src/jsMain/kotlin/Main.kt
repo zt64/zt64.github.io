@@ -1,18 +1,11 @@
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposableInBody
 import ui.component.*
 import ui.theme.WebsiteStyleSheet
-import kotlin.random.Random
 
 fun main() {
     renderComposableInBody {
-        var zoter by remember { mutableStateOf(false) }
-
         Style(WebsiteStyleSheet)
 
         Row(
@@ -52,19 +45,9 @@ fun main() {
                             style {
                                 fontWeight(700)
                             }
-
-                            onClick {
-                                if (zoter) {
-                                    zoter = false
-
-                                    return@onClick
-                                }
-
-                                zoter = Random.nextInt(10) < 3
-                            }
                         }
                     ) {
-                        Text(if (zoter) "zoter" else "zt")
+                        Text("zt")
                     }
                 }
 
