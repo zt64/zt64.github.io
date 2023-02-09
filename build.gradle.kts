@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform") version "1.8.0"
-    kotlin("plugin.serialization") version "1.8.0"
-    id("org.jetbrains.compose") version "1.3.0"
+    kotlin("multiplatform") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
+    id("org.jetbrains.compose") version "1.2.1"
 }
 
 repositories {
@@ -24,7 +24,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
                 // Ktor
-                val ktorVersion = "2.2.2"
+                val ktorVersion = "2.2.3"
                 implementation("io.ktor:ktor-client-core-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 implementation("io.ktor:ktor-client-websockets-js:$ktorVersion")
