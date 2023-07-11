@@ -17,20 +17,23 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-        
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-    
+
+      - name: Upgrade yarn.lock
+        run: ./gradlew :kotlinUpgradeYarnLock
+
       - name: Execute Gradle build
         run: ./gradlew :jsBrowserDistribution
-        
+
       - uses: actions/upload-pages-artifact@v2
         with:
           path: build/distributions
-        
+
   deploy:
     needs: build
-    
+
     permissions:
       pages: write
       id-token: write
@@ -38,10 +41,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Deploy GitHub Pages site
         uses: actions/deploy-pages@v2
-    
+
