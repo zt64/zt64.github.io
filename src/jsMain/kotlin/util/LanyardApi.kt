@@ -42,7 +42,7 @@ data class Presence(
         val name: String,
         val party: Party? = null,
         val state: String? = null,
-        val timestamps: Timestamps,
+        val timestamps: Timestamps? = null,
         val type: Int,
     ) {
         @Serializable
@@ -86,9 +86,7 @@ enum class OpCode {
 
         override fun deserialize(decoder: Decoder) = values()[decoder.decodeInt()]
 
-        override fun serialize(encoder: Encoder, value: OpCode) {
-            encoder.encodeInt(value.ordinal)
-        }
+        override fun serialize(encoder: Encoder, value: OpCode) = encoder.encodeInt(value.ordinal)
     }
 }
 
@@ -189,8 +187,6 @@ object LanyardApi {
             val message = when (frame) {
                 is Frame.Text -> {
                     val jsonStr = frame.readText()
-
-                    println("Received event message: $jsonStr")
 
                     json.decodeFromString<Message>(jsonStr)
                 }

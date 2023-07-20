@@ -1,6 +1,7 @@
 package ui.component
 
 import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticMouseEvent
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import ui.theme.foregroundColor
@@ -8,7 +9,7 @@ import ui.theme.foregroundColor
 @Composable
 fun Container(
     gap: CSSNumeric = 0.6.cssRem,
-    onClick: (() -> Unit)? = null,
+    onClick: ((SyntheticMouseEvent) -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     Div(
@@ -28,7 +29,7 @@ fun Container(
                 if (onClick != null) cursor("pointer")
             }
 
-            if (onClick != null) onClick { onClick() }
+            if (onClick != null) onClick(onClick)
         }
     ) {
         content()

@@ -2,6 +2,7 @@ package ui.component
 
 import androidx.compose.runtime.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.datetime.Clock
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
@@ -18,27 +19,6 @@ fun LanyardCard() {
     }
 
     if (activity != null) {
-        var elapsedTime by remember { mutableStateOf<String?>(null) }
-
-        // this sucks, but I don't know how else to do it
-        LaunchedEffect(activity) {
-            while (true) {
-                elapsedTime = (Clock.System.now().epochSeconds.seconds - activity.timestamps.start.milliseconds).toComponents { hours, minutes, seconds, _ ->
-                    buildString {
-                        if (hours > 0) {
-                            append(hours.toString().padStart(2, '0'))
-                            append(':')
-                        }
-
-                        append(minutes.toString().padStart(2, '0'))
-                        append(':')
-                        append(seconds.toString().padStart(2, '0'))
-                    }
-                }
-                delay(500)
-            }
-        }
-
         Container(
             gap = 1.3.cssRem
         ) {
@@ -58,6 +38,30 @@ fun LanyardCard() {
                 }
 
                 H4 {
+                    var elapsedTime by remember { mutableStateOf<String?>(null) }
+
+                    // this sucks, but I don't know how else to do it
+
+                    if (activity.timestamps != null) {
+                        LaunchedEffect(activity) {
+                            while (isActive) {
+                                elapsedTime = (Clock.System.now().epochSeconds.seconds - activity.timestamps.start.milliseconds).toComponents { hours, minutes, seconds, _ ->
+                                    buildString {
+                                        if (hours > 0) {
+                                            append(hours.toString().padStart(2, '0'))
+                                            append(':')
+                                        }
+
+                                        append(minutes.toString().padStart(2, '0'))
+                                        append(':')
+                                        append(seconds.toString().padStart(2, '0'))
+                                    }
+                                }
+                                delay(500)
+                            }
+                        }
+                    }
+
                     activity.details?.let {
                         Text(it)
                         Br()
@@ -88,10 +92,12 @@ fun PresenceIcon(
             }
         }
     ) {
-        val src = if (largeImage.startsWith("spotify:")) {
-            "https://i.scdn.co/image/${largeImage.removePrefix("spotify:")}"
-        } else {
-            LanyardApi.getAssetImage(applicationId!!, largeImage)
+        val src = remember {
+            if (largeImage.startsWith("spotify:")) {
+                "https://i.scdn.co/image/${largeImage.removePrefix("spotify:")}"
+            } else {
+                LanyardApi.getAssetImage(applicationId!!, largeImage)
+            }
         }
 
         Img(

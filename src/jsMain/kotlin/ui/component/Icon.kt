@@ -7,9 +7,7 @@ import org.jetbrains.compose.web.css.width
 import org.jetbrains.compose.web.dom.Img
 
 @Composable
-fun Icon(
-    path: String
-) {
+fun Icon(path: String) {
     Img(
         attrs = {
             style {
