@@ -1,7 +1,9 @@
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+
 plugins {
-    kotlin("multiplatform") version "1.8.0"
-    kotlin("plugin.serialization") version "1.8.0"
-    id("org.jetbrains.compose") version "1.4.1"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.compose)
 }
 
 repositories {
@@ -20,17 +22,23 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(compose.runtime)
-                implementation(compose.web.core)
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                implementation(compose.html.core)
 
-                // Ktor
-                val ktorVersion = "2.3.2"
-                implementation("io.ktor:ktor-client-core-js:$ktorVersion")
-                implementation("io.ktor:ktor-client-js:$ktorVersion")
-                implementation("io.ktor:ktor-client-websockets-js:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation(libs.kotlin.datetime)
+
+                implementation(libs.ktor.core)
+                implementation(libs.ktor.client.websockets.js)
+                implementation(libs.ktor.client.js)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
             }
         }
+    }
+}
+
+afterEvaluate {
+    rootProject.extensions.configure<NodeJsRootExtension> {
+        versions.webpackDevServer.version = "4.0.0"
+        versions.webpackCli.version = "4.10.0"
     }
 }

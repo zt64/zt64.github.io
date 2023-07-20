@@ -6,3 +6,4 @@ if (config.mode == "production") {
     delete config.output.libraryTarget;
 }
 config.output.globalObject = "window"
+config.output.publicPath = ""

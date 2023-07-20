@@ -11,8 +11,11 @@ import io.ktor.serialization.kotlinx.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import kotlinx.serialization.*
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -20,27 +23,19 @@ import kotlinx.serialization.json.*
 
 @Serializable
 data class Presence(
-    @SerialName("active_on_discord_desktop")
     val activeOnDiscordDesktop: Boolean,
-    @SerialName("active_on_discord_mobile")
     val activeOnDiscordMobile: Boolean,
-    @SerialName("active_on_discord_web")
     val activeOnDiscordWeb: Boolean,
     val activities: List<Activity>,
-    @SerialName("discord_status")
     val discordStatus: String,
-    @SerialName("discord_user")
     val discordUser: DiscordUser,
-    @SerialName("listening_to_spotify")
     val listeningToSpotify: Boolean,
-    val spotify: JsonObject?
+    val spotify: JsonObject?,
 ) {
     @Serializable
     data class Activity(
-        @SerialName("application_id")
         val applicationId: String? = null,
         val assets: Assets? = null,
-        @SerialName("created_at")
         val createdAt: Long,
         val details: String? = null,
         val id: String,
@@ -48,18 +43,14 @@ data class Presence(
         val party: Party? = null,
         val state: String? = null,
         val timestamps: Timestamps,
-        val type: Int
+        val type: Int,
     ) {
         @Serializable
         data class Assets(
-            @SerialName("large_image")
             val largeImage: String,
-            @SerialName("large_text")
             val largeText: String,
-            @SerialName("small_image")
             val smallImage: String? = null,
-            @SerialName("small_text")
-            val smallText: String? = null
+            val smallText: String? = null,
         )
 
         @Serializable
@@ -72,15 +63,14 @@ data class Presence(
         val bot: Boolean,
         val discriminator: String,
         val id: String,
-        @SerialName("public_flags")
         val publicFlags: Int,
-        val username: String
+        val username: String,
     )
 
     @Serializable
     data class Timestamps(
         val start: Long,
-        val end: Long? = null
+        val end: Long? = null,
     )
 }
 
@@ -94,7 +84,7 @@ enum class OpCode {
     companion object Serializer : KSerializer<OpCode> {
         override val descriptor = buildClassSerialDescriptor("OpCode")
 
-        override fun deserialize(decoder: Decoder) = OpCode.values()[decoder.decodeInt()]
+        override fun deserialize(decoder: Decoder) = values()[decoder.decodeInt()]
 
         override fun serialize(encoder: Encoder, value: OpCode) {
             encoder.encodeInt(value.ordinal)
@@ -102,7 +92,9 @@ enum class OpCode {
     }
 }
 
+@OptIn(ExperimentalSerializationApi::class)
 @Serializable
+@JsonClassDiscriminator("op")
 sealed interface Message {
     val op: OpCode
 
@@ -122,42 +114,36 @@ sealed interface Message {
         val type: Type,
 
         @SerialName("d")
-        val data: Presence
+        val data: Presence,
     ) : Message {
         override val op = OpCode.EVENT
 
         enum class Type {
             INIT_STATE,
-            PRESENCE_UPDATE
+            PRESENCE_UPDATE,
         }
     }
 
     @Serializable
     data class Hello(
         @SerialName("d")
-        val data: Data
+        val data: Data,
     ) : Message {
         override val op = OpCode.HELLO
 
         @Serializable
-        data class Data(
-            @SerialName("heartbeat_interval")
-            val heartbeatInterval: Int
-        )
+        data class Data(val heartbeatInterval: Int)
     }
 
     @Serializable
     data class Initialize(
         @SerialName("d")
-        val data: Data
+        val data: Data,
     ) : Message {
         override val op = OpCode.INITIALIZE
 
         @Serializable
-        data class Data(
-            @SerialName("subscribe_to_id")
-            val subscribeToId: String
-        )
+        data class Data(val subscribeToId: String)
     }
 
     @Serializable
@@ -170,9 +156,11 @@ object LanyardApi {
     private const val USER_ID = "289556910426816513"
     private const val WEBSOCKET_URL = "wss://api.lanyard.rest/socket"
 
+    @OptIn(ExperimentalSerializationApi::class)
     private val json = Json {
         ignoreUnknownKeys = true
         encodeDefaults = true
+        namingStrategy = JsonNamingStrategy.SnakeCase
     }
 
     private val httpClient = HttpClient(Js) {
@@ -188,14 +176,12 @@ object LanyardApi {
     private lateinit var webSocketSession: DefaultClientWebSocketSession
     var activity by mutableStateOf<Presence.Activity?>(null)
 
-    suspend fun connectWebSocket() {
-        try {
-            webSocketSession = httpClient.webSocketSession(WEBSOCKET_URL)
+    suspend fun connectWebSocket() = try {
+        webSocketSession = httpClient.webSocketSession(WEBSOCKET_URL)
 
-            listenToSocket()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        listenToSocket()
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 
     private suspend fun listenToSocket() {
@@ -241,6 +227,6 @@ object LanyardApi {
     }
 
     fun getAssetImage(applicationId: String, assetId: String): String {
-        return "https://cdn.discordapp.com/app-assets/${applicationId}/${assetId}.webp?size=512"
+        return "https://cdn.discordapp.com/app-assets/$applicationId/$assetId.webp?size=512"
     }
 }
