@@ -12,10 +12,7 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -84,7 +81,7 @@ enum class OpCode {
     companion object Serializer : KSerializer<OpCode> {
         override val descriptor = buildClassSerialDescriptor("OpCode")
 
-        override fun deserialize(decoder: Decoder) = values()[decoder.decodeInt()]
+        override fun deserialize(decoder: Decoder) = entries[decoder.decodeInt()]
 
         override fun serialize(encoder: Encoder, value: OpCode) = encoder.encodeInt(value.ordinal)
     }

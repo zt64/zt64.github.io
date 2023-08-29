@@ -1,8 +1,8 @@
 [versions]
-kotlin = "1.9.10"
+kotlin = "1.9.0"
 kotlin-datetime = "0.4.0"
 ktor = "2.3.3"
-compose = "1.4.3"
+compose = "1.5.0"
 
 [libraries]
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
@@ -15,4 +15,4 @@ kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-compose = { id = "org.jetbrains.compose", version.ref = "compose"}
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }

@@ -6,12 +6,6 @@ plugins {
     alias(libs.plugins.compose)
 }
 
-repositories {
-    google()
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-}
-
 kotlin {
     js(IR) {
         browser()
