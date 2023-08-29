@@ -42,37 +42,40 @@ fun LanyardCard() {
 
                     // this sucks, but I don't know how else to do it
 
-                    if (activity.timestamps != null) {
-                        LaunchedEffect(activity) {
-                            while (isActive) {
-                                elapsedTime = (Clock.System.now().epochSeconds.seconds - activity.timestamps.start.milliseconds).toComponents { hours, minutes, seconds, _ ->
-                                    buildString {
-                                        if (hours > 0) {
-                                            append(hours.toString().padStart(2, '0'))
-                                            append(':')
-                                        }
+                    if (elapsedTime != null) {
+                        if (activity.timestamps != null) {
+                            LaunchedEffect(activity) {
+                                while (isActive) {
+                                    elapsedTime =
+                                        (Clock.System.now().epochSeconds.seconds - activity.timestamps.start.milliseconds).toComponents { hours, minutes, seconds, _ ->
+                                            buildString {
+                                                if (hours > 0) {
+                                                    append(hours.toString().padStart(2, '0'))
+                                                    append(':')
+                                                }
 
-                                        append(minutes.toString().padStart(2, '0'))
-                                        append(':')
-                                        append(seconds.toString().padStart(2, '0'))
-                                    }
+                                                append(minutes.toString().padStart(2, '0'))
+                                                append(':')
+                                                append(seconds.toString().padStart(2, '0'))
+                                            }
+                                        }
+                                    delay(500)
                                 }
-                                delay(500)
                             }
                         }
-                    }
 
-                    activity.details?.let {
-                        Text(it)
-                        Br()
-                    }
+                        activity.details?.let {
+                            Text(it)
+                            Br()
+                        }
 
-                    activity.state?.let {
-                        Text(it)
-                        Br()
-                    }
+                        activity.state?.let {
+                            Text(it)
+                            Br()
+                        }
 
-                    Text("$elapsedTime elapsed")
+                        Text("$elapsedTime elapsed")
+                    }
                 }
             }
         }
