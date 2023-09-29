@@ -76,8 +76,6 @@ fun main() {
                         url = "https://github.com/zt64",
                     )
                 }
-
-                LanyardCard()
             }
         }
     }
