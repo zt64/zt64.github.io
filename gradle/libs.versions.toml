@@ -2,7 +2,7 @@
 kotlin = "1.9.10"
 kotlin-datetime = "0.4.1"
 ktor = "2.3.4"
-compose = "1.5.2"
+compose = "1.5.3"
 
 [libraries]
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
