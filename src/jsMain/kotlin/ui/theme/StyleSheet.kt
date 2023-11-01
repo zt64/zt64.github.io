@@ -20,4 +20,16 @@ object WebsiteStyleSheet : StyleSheet() {
             margin(0.px)
         }
     }
+
+    val container by style {
+        display(DisplayStyle.Flex)
+        flexDirection(FlexDirection.Row)
+
+        media(mediaMaxWidth(72.cssRem)) {
+            self style {
+                display(DisplayStyle.Flex)
+                flexDirection(FlexDirection.Column)
+            }
+        }
+    }
 }

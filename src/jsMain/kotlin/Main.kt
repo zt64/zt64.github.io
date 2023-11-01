@@ -8,7 +8,7 @@ fun main() {
     renderComposableInBody {
         Style(WebsiteStyleSheet)
 
-        Row(
+        List(
             style = {
                 justifyContent(JustifyContent.Center)
                 alignItems(AlignItems.Center)
@@ -61,13 +61,13 @@ fun main() {
                 ) {
                     Text(
                         """
-                        I'm a 19yo student studying Applied Computer Science who likes making random things. 
+                        I'm a 20yo student studying Applied Computer Science who likes making random things. 
                         Currently I’m working on a YouTube client for Android called Hyperion.
                         """.trimIndent(),
                     )
                 }
 
-                Row(
+                List(
                     gap = 1.2.cssRem,
                 ) {
                     SocialChip(

@@ -1,13 +1,17 @@
 package ui.component
 
 import androidx.compose.runtime.Composable
+import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.Div
+import org.w3c.dom.HTMLDivElement
 
 @Composable
 fun Column(
+    attrs: (AttrsScope<HTMLDivElement>.() -> Unit)? = null,
     gap: CSSNumeric? = null,
-    content: @Composable () -> Unit
+    content: ContentBuilder<HTMLDivElement>
 ) {
     Div(
         attrs = {
@@ -17,8 +21,9 @@ fun Column(
 
                 if (gap != null) gap(gap)
             }
-        }
-    ) {
-        content()
-    }
+
+            if (attrs != null) attrs()
+        },
+        content = content
+    )
 }

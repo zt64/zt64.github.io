@@ -11,9 +11,7 @@ fun SocialChip(
     url: String
 ) {
     Container(
-        onClick = {
-            window.open(url)
-        }
+        onClick = { window.open(url) }
     ) {
         icon()
 
