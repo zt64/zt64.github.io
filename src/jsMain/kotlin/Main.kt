@@ -10,7 +10,7 @@ fun main() {
 
         List(
             style = {
-                justifyContent(JustifyContent.Center)
+                // justifyContent(JustifyContent.Center)
                 alignItems(AlignItems.Center)
                 height(100.vh)
             },
