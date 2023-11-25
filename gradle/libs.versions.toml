@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.21"
 kotlin-datetime = "0.4.1"
-ktor = "2.3.5"
+ktor = "2.3.6"
 compose = "1.5.11"
 
 [libraries]
