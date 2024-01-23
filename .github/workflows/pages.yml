@@ -27,7 +27,7 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew :jsBrowserDistribution
 
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: build/dist/js/productionExecutable
 
