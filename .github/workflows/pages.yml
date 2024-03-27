@@ -19,13 +19,10 @@ jobs:
           java-version: 11
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
 
-      - name: Upgrade yarn.lock
-        run: ./gradlew :kotlinUpgradeYarnLock
-
-      - name: Execute Gradle build
-        run: ./gradlew :jsBrowserDistribution
+      - name: Build
+        run: ./gradlew build
 
       - uses: actions/upload-pages-artifact@v3
         with:
