@@ -1,9 +1,12 @@
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose)
+    alias(libs.plugins.ktlint)
+}
+
+ktlint {
+    version = libs.versions.ktlint.get()
 }
 
 kotlin {
@@ -12,27 +15,33 @@ kotlin {
         binaries.executable()
     }
 
+    // @OptIn(ExperimentalWasmDsl::class)
+    // wasmJs {
+    //     moduleName = "website"
+    //     browser {
+    //         commonWebpackConfig {
+    //             outputFileName = "website.js"
+    //         }
+    //     }
+    //     binaries.executable()
+    // }
+
     sourceSets {
-        val jsMain by getting {
+        commonMain {
             dependencies {
                 implementation(compose.runtime)
+                // implementation(compose.ui)
                 implementation(compose.html.core)
-
-                implementation(libs.kotlin.datetime)
-
-                implementation(libs.ktor.core)
-                implementation(libs.ktor.client.websockets.js)
-                implementation(libs.ktor.client.js)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.serialization.kotlinx.json)
+                // implementation(compose.material3)
+                // implementation(libs.coil.compose)
+                // implementation(libs.coil.network.ktor)
+                // implementation(libs.ktor.client.cio)
+                // implementation("io.ktor:ktor-client-core:3.0.0-wasm1")
             }
         }
     }
 }
 
-afterEvaluate {
-    rootProject.extensions.configure<NodeJsRootExtension> {
-        versions.webpackDevServer.version = "4.0.0"
-        versions.webpackCli.version = "4.10.0"
-    }
-}
+// compose.experimental {
+//     web.application {}
+// }
