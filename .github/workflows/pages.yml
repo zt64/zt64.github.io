@@ -7,16 +7,16 @@ on:
       - '**.kt'
       - '**.kts'
       - 'gradle.properties'
-      - 'gradle-wrapper.properties'
       - '.github/workflows/pages.yml'
+      - 'gradle/**'
   pull_request:
     branches: [ main ]
     paths:
       - '**.kt'
       - '**.kts'
       - 'gradle.properties'
-      - 'gradle-wrapper.properties'
       - '.github/workflows/pages.yml'
+      - 'gradle/**'
   workflow_dispatch:
 
 jobs:
