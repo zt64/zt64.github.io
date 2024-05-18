@@ -1,9 +1,22 @@
-name: Deploy website
+name: Build and deploy 
 
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ main ]
+    paths:
+      - '**.kt'
+      - '**.kts'
+      - 'gradle.properties'
+      - 'gradle-wrapper.properties'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.kt'
+      - '**.kts'
+      - 'gradle.properties'
+      - 'gradle-wrapper.properties'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 jobs:
@@ -29,6 +42,7 @@ jobs:
           path: build/dist/js/productionExecutable
 
   deploy:
+    if: github.event_name == 'push'
     needs: build
 
     permissions:
