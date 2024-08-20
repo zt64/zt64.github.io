@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.10"
-kotlin-datetime = "0.6.0"
+kotlin-datetime = "0.6.1"
 ktor = "3.2.0"
 compose = "1.6.11"
 coil = "3.0.0-alpha10"
