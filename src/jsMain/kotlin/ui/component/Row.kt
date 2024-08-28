@@ -4,14 +4,16 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.css.CSSNumeric
 import org.jetbrains.compose.web.css.StyleScope
 import org.jetbrains.compose.web.css.gap
+import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.Div
+import org.w3c.dom.HTMLDivElement
 import ui.theme.WebsiteStyleSheet
 
 @Composable
-fun List(
+fun Row(
     style: (StyleScope.() -> Unit)? = null,
     gap: CSSNumeric? = null,
-    content: @Composable () -> Unit
+    content: ContentBuilder<HTMLDivElement>
 ) {
     Div(
         attrs = {
@@ -22,8 +24,7 @@ fun List(
             }
 
             if (style != null) style(style)
-        }
-    ) {
-        content()
-    }
+        },
+        content = content
+    )
 }
