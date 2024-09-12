@@ -6,16 +6,22 @@ on:
     paths:
       - '**.kt'
       - '**.kts'
+      - 'gradlew'
+      - 'gradlew.bat'
       - 'gradle.properties'
-      - '.github/workflows/pages.yml'
+      - '.github/workflows/**'
+      - 'src/**'
       - 'gradle/**'
   pull_request:
     branches: [ main ]
     paths:
       - '**.kt'
       - '**.kts'
+      - 'gradlew'
+      - 'gradlew.bat'
       - 'gradle.properties'
-      - '.github/workflows/pages.yml'
+      - '.github/workflows/**'
+      - 'src/**'
       - 'gradle/**'
   workflow_dispatch:
 
