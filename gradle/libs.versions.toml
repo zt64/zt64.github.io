@@ -3,7 +3,7 @@ kotlin = "2.0.21"
 kotlin-datetime = "0.6.1"
 ktor = "3.2.0"
 compose = "1.6.11"
-coil = "3.0.0-rc01"
+coil = "3.0.0-rc02"
 ktlintPlugin = "12.1.1"
 ktlint = "1.2.1"
 
