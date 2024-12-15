@@ -4,6 +4,10 @@ import org.jetbrains.compose.web.css.*
 
 object WebsiteStyleSheet : StyleSheet() {
     init {
+        "html, body" style {
+            height(100.percent)
+        }
+
         "body" style {
             display(DisplayStyle.Flex)
             justifyContent(JustifyContent.Center)
@@ -25,9 +29,8 @@ object WebsiteStyleSheet : StyleSheet() {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Row)
 
-        media(mediaMaxWidth(72.cssRem)) {
+        media(mediaMaxWidth(74.em)) {
             self style {
-                display(DisplayStyle.Flex)
                 flexDirection(FlexDirection.Column)
             }
         }

@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 kotlin-datetime = "0.6.1"
-ktor = "3.2.0"
+ktor = "3.0.2"
 compose = "1.7.1"
 coil = "3.0.4"
 ktlintPlugin = "12.1.2"
@@ -10,11 +10,10 @@ ktlint = "1.2.1"
 [libraries]
 kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlin-datetime" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
-coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", version.ref = "coil" }
+coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
 
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
-ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
