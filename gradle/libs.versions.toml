@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.1.0"
 kotlin-datetime = "0.6.1"
-ktor = "3.0.2"
+ktor = "3.0.3"
 compose = "1.7.1"
 coil = "3.0.4"
 ktlintPlugin = "12.1.2"
