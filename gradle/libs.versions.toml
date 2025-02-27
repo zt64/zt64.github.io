@@ -4,7 +4,7 @@ kotlin-datetime = "0.6.2"
 ktor = "3.1.1"
 compose = "1.7.3"
 coil = "3.1.0"
-ktlintPlugin = "12.1.2"
+ktlintPlugin = "12.2.0"
 ktlint = "1.2.1"
 
 [libraries]
