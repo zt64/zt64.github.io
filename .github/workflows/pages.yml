@@ -43,7 +43,7 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: build/dist/js/productionExecutable
 
