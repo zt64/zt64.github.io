@@ -1,0 +1,1 @@
+document.body.classList.toggle("light", window.matchMedia("(prefers-color-scheme: light)").matches);
