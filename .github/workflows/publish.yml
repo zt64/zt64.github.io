@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build
+        run: pnpm build
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
